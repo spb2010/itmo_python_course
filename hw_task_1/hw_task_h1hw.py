@@ -16,7 +16,7 @@ def bigger_length_list(list1, list2):
     elif len(list1) < len(list2):
         return len(list2)
     else:
-        return "Строки равны"
+        return "Длина списков равна"
 
 list1 = [1]
 list2 = [1, 2]
@@ -41,7 +41,7 @@ def compare_to_100(digit):
     #4)	напишите функцию которая
     #a)	принимает число
     #b)	Если число больше 100 или меньше -100, то вывести в косоль символ “-”, иначе вывести на экран символ “+”
-    if digit/100 != 1:
+    if (digit > 100) or (digit < -100):
         return "-"
     else:
         return "+"
@@ -102,7 +102,11 @@ def abreveature(string1: str):
     #Если на вход поступил другой тип данных, должно срабатывать исключение
     #Результат работы функции распечатайте в консоль
 
-    words = string1.split()
+    try:
+        words = string1.split()
+    except:
+        print("Неверный тип данных!")
+
     abreveature_word = ''
 
     for word in words:
@@ -110,7 +114,7 @@ def abreveature(string1: str):
     return abreveature_word
 
 print(abreveature("ТЕОРИЯ РЕШЕНИЯ ИЗОБРЕТАТЕЛЬСКИХ ЗАДАЧ"))
-#print(abreveature(123))
+print(abreveature(123))
 
 
 #Задача №9
