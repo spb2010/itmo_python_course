@@ -109,6 +109,7 @@ def repeate_if_exception(fn):
             return fn(*args, **kwargs)
     return wrapper
 
+
 @repeate_if_exception
 @integer_decorator
 def integer_calculation3(digit):
