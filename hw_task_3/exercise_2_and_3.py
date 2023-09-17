@@ -51,11 +51,9 @@ class Tutor(Person):
         self.material_name = material_name
         self.args = args
         # Атрибут учителя “количество обученных учеников” увеличивается на 1.
-        # self.student_number += len(args)
         for arguments in args:
-            print(arguments)
-            VictorLolov.take(material_name)
-            self.arguments.take(material_name)
+            arguments.take(material_name)
+            self.student_number += 1
 
 
 class Student(Person):
@@ -65,8 +63,7 @@ class Student(Person):
         self.knowledge = knowledge or []
 
     def take(self, knowledge_name):
-        self.knowledge_name = knowledge_name
-        self.knowledge.append(self.knowledge)
+        self.knowledge.append(knowledge_name)
 
 
 class materials:
@@ -79,12 +76,6 @@ class materials:
 
 VictorIvanov = Tutor("Victor Ivanov", 50, "male")
 
-# VictorIvanov.teach("Python", "VictorLolov", "SergeyZadikov", "ElenaSidorova")
-# VictorIvanov.teach("Python", "Victor Lolov", "Sergey Zadikov", "Elena Sidorova")
-# VictorIvanov.teach("Python", "Victor Lolov", "Sergey Zadikov", "Elena Sidorova")
-# VictorIvanov.teach("Python", "Victor Lolov", "Sergey Zadikov", "Elena Sidorova")
-# print(VictorIvanov.student_number)
-
 ElenaSidorova = Student("Elena Sidorova", 20, "female")
 VictorLolov = Student("Victor Lolov", 21, "male")
 SergeyZadikov = Student("Sergey Zadikov", 19, "male")
@@ -92,5 +83,7 @@ ElenaSidorova.take("Python")
 ElenaSidorova.take("Python1")
 ElenaSidorova.take("Python2")
 ElenaSidorova.take("Python3")
-# print(ElenaSidorova.knowledge)
-VictorIvanov.teach("Python", "VictorLolov", "SergeyZadikov", "ElenaSidorova")
+
+VictorIvanov.teach("Python123", VictorLolov, SergeyZadikov, ElenaSidorova)
+print(ElenaSidorova.knowledge)
+print(VictorIvanov.student_number)
