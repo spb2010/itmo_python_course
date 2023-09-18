@@ -25,7 +25,7 @@
 # b.Для классов “Материалы” и “Ученик” добавьте магический метод, для вызова функции len() от объектов классов.
 # Материалы должны возвращать кол - во материалов, ученики кол - во знаний.
 # c.добавьте в класс ученика, метод, позволяющий ученику случайно "забывать" какую - нибудь часть своих знаний.
-
+import random
 
 class Person:
     # а.Классы “ученик” и “учитель” должны быть наследованы от класса “человек”.
@@ -50,9 +50,10 @@ class Tutor(Person):
         # Для учителя добавьте метод “teach”: - Метод принимает строку “название материала” и неизвестное количество учеников.
         self.material_name = material_name
         self.args = args
-        # Атрибут учителя “количество обученных учеников” увеличивается на 1.
         for arguments in args:
+            # Для каждого ученика вызывается метод “take” из класса ученика с параметром “название материала”.
             arguments.take(material_name)
+            # Атрибут учителя “количество обученных учеников” увеличивается на 1.
             self.student_number += 1
 
 
@@ -65,25 +66,39 @@ class Student(Person):
     def take(self, knowledge_name):
         self.knowledge.append(knowledge_name)
 
+    def forget_knowledge(self):
+        if self.knowledge:
+            index = random.randrange(len(self))
+            self.knowledge.pop(index)
+
 
 class materials:
     def __init__(self, *args):
-        self.materials = args or []
+        self.materials = args or ['Python', 'Version Control Systems', 'Relational Databases', 'NoSQL databases', 'Message Brokers']
 
     def __len__(self):
         return len(self.materials)
 
 
+# - Создайте объект учителя
 VictorIvanov = Tutor("Victor Ivanov", 50, "male")
-
+# - Создайте 4 объекта учеников
 ElenaSidorova = Student("Elena Sidorova", 20, "female")
 VictorLolov = Student("Victor Lolov", 21, "male")
 SergeyZadikov = Student("Sergey Zadikov", 19, "male")
-ElenaSidorova.take("Python")
-ElenaSidorova.take("Python1")
-ElenaSidorova.take("Python2")
-ElenaSidorova.take("Python3")
+AnnaPetrova = Student("Anna Petrova", 20, "female")
 
-VictorIvanov.teach("Python123", VictorLolov, SergeyZadikov, ElenaSidorova)
+# - Проведите занятия по каждому материалу(5 раз вызовите метод teach) с произвольным набором учеников.
+VictorIvanov.teach("Python", VictorLolov, SergeyZadikov, ElenaSidorova)
+VictorIvanov.teach("Version Control Systems", AnnaPetrova, SergeyZadikov, ElenaSidorova)
+VictorIvanov.teach("Relational Databases", AnnaPetrova, SergeyZadikov, VictorLolov)
+VictorIvanov.teach("NoSQL databases", AnnaPetrova, SergeyZadikov, VictorLolov, ElenaSidorova)
+VictorIvanov.teach("Message Brokers", SergeyZadikov, VictorLolov)
+
+# - Выведите на печать знания каждого ученика.
 print(ElenaSidorova.knowledge)
+print(VictorLolov.knowledge)
+print(SergeyZadikov.knowledge)
+print(AnnaPetrova.knowledge)
+# Проверка работы счетчика учителя
 print(VictorIvanov.student_number)
