@@ -63,6 +63,9 @@ class Student(Person):
         super().__init__(name, age, sex)
         self.knowledge = knowledge or []
 
+    def __len__(self):
+        return len(self.knowledge)
+
     def take(self, knowledge_name):
         self.knowledge.append(knowledge_name)
 
