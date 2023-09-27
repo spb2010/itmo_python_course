@@ -54,17 +54,33 @@ class File_analisys_ai:
     # * Бесплатным считаем только полностью бесплатный инструмент (Free)
         free_with_review = list()
         not_free_with_review = list()
-        for soft in self.words:
-            if soft.split(",")[2] == "Free" and soft.split(",")[5] != "":
-                free_with_review.append(soft.split(",")[0])
-            elif soft.split(",")[2] != "Free" and soft.split(",")[5] != "":
-                not_free_with_review.append(soft.split(",")[0])
-        print(free_with_review)
 
+        for soft in self.words:
+            #print(soft.split(",")[0], soft.split(",")[2])
+            if len(soft.split(",")) > 4:
+                if soft.split(",")[2] == "Free" and soft.split(",")[5] != "":
+                    free_with_review.append(soft.split(",")[0])
+
+                elif soft.split(",")[2] != "Free" and soft.split(",")[5] != "":
+                    not_free_with_review.append(soft.split(",")[0])
+
+        if len(free_with_review) > len(not_free_with_review):
+            return print("Free Software is more reviewed")
+        else:
+            return print("Other Software is more reviewed")
 
     def useable_soft(self):
     # f.Создайте метод, который возвращает категорию задач (Useable For) для которой больше всего бесплатных инструментов
-        pass
+        free_with_useable = list()
+
+
+        for soft in self.words:
+            if len(soft.split(",")) > 4:
+                if soft.split(",")[2] == "Free" and soft.split(",")[3] != "":
+                    free_with_useable.append(soft.split(",")[3])
+        counted_numbers = Counter(free_with_useable)
+        most_common_country = counted_numbers.most_common(1)[0][0]
+        return print(most_common_country)
 
     def top_soft(self):
     #g.Создайте метод возвращающий топ 3 инструмента по запросу. Параметры запроса:
@@ -83,3 +99,4 @@ ufo.mounth()
 soft1 = File_analisys_ai()
 soft1.read_file()
 soft1.free_soft()
+soft1.useable_soft()
