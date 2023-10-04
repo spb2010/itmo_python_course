@@ -1,5 +1,5 @@
 import pandas as pd
-#import myplotlib.pyplot as plt
+import myplotlib.pyplot as plt
 
 
 def data_analisys(data1, data2):
@@ -9,8 +9,8 @@ def data_analisys(data1, data2):
     # c. Строит графики по столбцам “Open” и “Close” за диапазон даты из параметров
     dff = df.loc[data1:data2, ["Open", "Close"]]
     print(dff)
-    #plt.plot(dff)
-    #plt.savefig("graph.jpg")
+    plt.plot(dff)
+    plt.savefig("graph.jpg")
 
 data_analisys("2022-01-21", "2022-01-25")
 
