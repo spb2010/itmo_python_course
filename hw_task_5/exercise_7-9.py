@@ -19,11 +19,10 @@ def volume_analisys():
     #Не решено
     #8. * Создайте DataFrame из файла BCT-USD.csv
     df = pd.read_csv("BCT-USD.csv")
-    #df = df
-    dff = pd.DatetimeIndex(df["Date"]).month
-    #dff = df["Date"].dt.month
-    print(dff)
     #a. выведите в консоль месяц за который был самый маленький объем (Volume)
+    df['Date'] = pd.to_datetime(df['Date'])
+    min_volume = df['Volume'].min()
+    print(df['Date'][df['Volume'] == min_volume].dt.month_name().iloc[0])
 
 
 volume_analisys()
@@ -32,8 +31,18 @@ def price_analisys():
     #Не решено
     #9. * Создайте DataFrame из файла BCT-USD.csv
     df = pd.read_csv("BCT-USD.csv")
+
+    df['Date'] = pd.to_datetime(df['Date'])
+    filtered_df = df[df['Close'] > df['Open']]
+    df_months = filtered_df['Date'].dt.month_name().unique()
     #a. Выведите в консоль месяцы за которые цена при закрытия в конце месяца была выше цены открытия на начало месяца
-    #b. Если таких нет выведите соответствующее сообщение
+    if len(df_months) > 0:
+        print("Месяцы, в которых цена при закрытии была выше цены открытия:")
+        for month in df_months:
+            print(month)
+    else:
+        # b. Если таких нет выведите соответствующее сообщение
+        print("Нет месяцев, в которых цена при закрытии была выше цены открытия.")
 
 
 price_analisys()
